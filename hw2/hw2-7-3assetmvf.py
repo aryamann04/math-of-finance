@@ -44,7 +44,7 @@ print("\nb:", b)
 w_6 = a * 0.06 + b
 print("\nw(6%):", w_6)
 print(np.dot(w_6, mu))
-print(w_6.T @ C @ w_6)
+print(np.sqrt(w_6.T @ C @ w_6))
 
 
 #------------------------------------------#
