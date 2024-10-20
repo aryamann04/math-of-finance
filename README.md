@@ -5,3 +5,7 @@ Python files associated with homework problems for NYU's Mathematics of Finance 
 
 ### Homework 1: Fixed-Income - Rates, Bonds, & Yields (Chapter 2) 
 [Chapter 2 Exercises 1-15](https://github.com/user-attachments/files/17249424/Math_Finance_HW1.1.pdf)
+
+### Homework 2: Equities - Investment Theory (Chapter 3) 
+[Chapter 3 Selected Exercises](https://github.com/user-attachments/files/17451769/Math_Finance_HW2.pdf)
+
