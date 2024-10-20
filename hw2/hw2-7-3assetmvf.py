@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # given asset parameters
 
-mu = np.array([0.05, 0.06, 0.04])
+mu = np.array([0.05, 0.06, 0.03])
 sigma = np.array([0.06, 0.08, 0.10])
 rho = np.array([[1, 0.95, 0.9], [0.95, 1, 0.8], [0.9, 0.8, 1]])
 u = np.ones(3)
@@ -32,16 +32,20 @@ D = np.linalg.inv(D_inv)
 a = D[0, 0] * (C_inv @ mu) + D[1, 0] * (C_inv @ u)
 b = D[0, 1] * (C_inv @ mu) + D[1, 1] * (C_inv @ u)
 
-print("C:\n", C)
-print("\nD:\n", D)
-print("\na:\n", a)
-print("\nb:\n", b)
+print("C:", C)
+print("\nD:", D)
+print("\na:", a)
+print("\nb:", b)
 
 #------------------------------------------#
 #           Q7.2: MVF at mu = 6%           #
 #------------------------------------------#
 
-print("\nw(6%):\n", a * 0.06 + b)
+w_6 = a * 0.06 + b
+print("\nw(6%):", w_6)
+print(np.dot(w_6, mu))
+print(w_6.T @ C @ w_6)
+
 
 #------------------------------------------#
 #     Q7.3: MVF graph for mu = 0% - 12%    #
@@ -63,16 +67,13 @@ plt.xlabel('risk (sigma_p)')
 plt.ylabel('return (mu_p)')
 plt.title("mvf for 0% < mu < 12%")
 
-plt.grid(True)
-plt.legend()
-
-plt.show()
-
 #------------------------------------------#
 #          Q7.4: market portfolio          #
 #------------------------------------------#
 
-mu = np.array([0.05, 0.06, 0.04])
+# given asset parameters
+
+mu = np.array([0.05, 0.06, 0.03])
 sigma = np.array([0.06, 0.08, 0.10])
 rho = np.array([[1, 0.95, 0.9], [0.95, 1, 0.8], [0.9, 0.8, 1]])
 u = np.ones(3)
@@ -80,7 +81,9 @@ u = np.ones(3)
 C = np.outer(sigma, sigma) * rho
 C_inv = np.linalg.inv(C)
 
-r_0 = 0.03
+r_0 = 0.03  # risk-free rate
+
+# calculate market portfolio weights via formula (3.11)
 
 x = mu - r_0 * u
 w_m = (np.dot(C_inv, x)) / (np.dot(u.T, np.dot(C_inv, x)))
@@ -88,9 +91,23 @@ w_m = (np.dot(C_inv, x)) / (np.dot(u.T, np.dot(C_inv, x)))
 mu_m = np.dot(w_m.T, mu)
 sigma_m = np.sqrt(np.dot(np.dot(w_m.T, C), w_m))
 
-cml = (mu_m - r_0)/ sigma_m
+cml = (mu_m - r_0)/ sigma_m  # slope that connects market portfolio to r_0
 
 print(f"\nweights: {w_m}\n")
 print(f"\nmu_m: {mu_m*100:.2f}%\n")
 print(f"\nsigma_m: {sigma_m*100:.2f}%\n")
 print(f"\ncml slope: {cml:.4f}")
+
+
+# for 7.3
+# add market portfolio (red point)
+plt.scatter(sigma_m, mu_m, color='red', zorder=5)
+
+# add cml line
+sigma_cml = np.linspace(0, max(sigma_values), 100)
+mu_cml = r_0 + cml * sigma_cml
+plt.plot(sigma_cml, mu_cml, label='cml', color='black', linestyle='--')
+
+plt.grid(True)
+plt.legend()
+plt.show()
