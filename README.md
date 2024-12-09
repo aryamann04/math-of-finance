@@ -9,3 +9,5 @@ Python files associated with homework problems for NYU's Mathematics of Finance 
 ### Homework 2: Equities - Investment Theory (Chapter 3) 
 [Chapter 3 Selected Exercises](https://github.com/user-attachments/files/17451769/Math_Finance_HW2.pdf)
 
+### Homework 3: Forwards, Futures, Risk-Netural Pricing, & Option Pricing (Chapters 4-6) 
+[Chapters 4-6 Selected Exercises](https://github.com/user-attachments/files/18058436/Math_Finance_HW3.pdf)
